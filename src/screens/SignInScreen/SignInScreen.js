@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-  Button,
   View,
   Text,
   Image,
@@ -14,13 +13,18 @@ import Logo from '../../../assets/logo.png'
 import { LinearGradient } from 'expo-linear-gradient'
 import CustomInput from '../../components/CustomInput'
 import CustomButton from '../../components/CustomButton'
+import { useForm } from 'react-hook-form'
 
 const SignInScreen = () => {
-  const [email, setEmail] = React.useState('')
-  const [password, setPassword] = React.useState('')
+  const { control, handleSubmit } = useForm({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  })
   const { height } = useWindowDimensions()
-  const onSignInPressed = () => {
-    console.warn('Sign in')
+  const onSignInPressed = (data) => {
+    console.warn(data)
   }
 
   return (
@@ -37,14 +41,15 @@ const SignInScreen = () => {
           </View>
           <View style={{ marginTop: 20, paddingVertical: 10, width: '100%' }}>
             <CustomInput
+              name='email'
+              control={control}
               placeholder='Email'
-              value={email}
-              setValue={setEmail}
+              rules={{ required: 'Email is required' }}
             />
             <CustomInput
+              name='password'
+              control={control}
               placeholder='Password'
-              value={password}
-              setValue={setPassword}
               secureTextEntry
             />
             <Text style={[styles.forgotPassword, { marginTop: 20 }]}>
@@ -59,7 +64,10 @@ const SignInScreen = () => {
             ]}
             style={styles.login}
           >
-            <CustomButton onPress={onSignInPressed} text='Đăng nhập' />
+            <CustomButton
+              onPress={handleSubmit(onSignInPressed)}
+              text='Đăng nhập'
+            />
           </LinearGradient>
         </View>
       </ScrollView>
