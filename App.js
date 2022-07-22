@@ -1,9 +1,9 @@
 import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, View } from 'react-native'
 import { useFonts, Inter_700Bold } from '@expo-google-fonts/inter'
-import { Roboto_400Regular, Roboto_700Bold } from '@expo-google-fonts/roboto'
-import SignInScreen from './src/screens/SignInScreen'
+import { Roboto_400Regular } from '@expo-google-fonts/roboto'
 import AppLoading from 'expo-app-loading'
+import Navigation from './src/navigation'
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -15,7 +15,7 @@ export default function App() {
   }
   return (
     <View style={styles.container}>
-      <SignInScreen />
+      <Navigation />
       <StatusBar style='auto' />
     </View>
   )
@@ -23,8 +23,9 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignContent: 'center',
+    // flex: 1,
+    // alignItems: 'center',
+    // justifyContent: 'center',
     width: '100%',
     height: '100%',
     margin: 0,

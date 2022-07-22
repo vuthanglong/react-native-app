@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { Text, View, StyleSheet } from 'react-native'
 import { TextInput } from 'react-native-paper'
 import { Controller } from 'react-hook-form'
 
@@ -32,11 +32,13 @@ const CustomInput = ({
               style={styles.input}
             />
           </View>
-          {/* {error && (
-            <Text style={{ color: 'red', alignSelf: 'stretch' }}>
+          {error && (
+            <Text
+              style={{ color: 'red', alignSelf: 'flex-start', marginTop: 5 }}
+            >
               {error.message || 'Error'}
             </Text>
-          )} */}
+          )}
         </>
       )}
     />

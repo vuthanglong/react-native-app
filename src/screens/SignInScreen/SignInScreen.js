@@ -14,6 +14,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 import CustomInput from '../../components/CustomInput'
 import CustomButton from '../../components/CustomButton'
 import { useForm } from 'react-hook-form'
+import { useNavigation } from '@react-navigation/native'
 
 const SignInScreen = () => {
   const { control, handleSubmit } = useForm({
@@ -22,15 +23,19 @@ const SignInScreen = () => {
       password: '',
     },
   })
-  const { height } = useWindowDimensions()
+  const { height, width } = useWindowDimensions()
+  const navigation = useNavigation()
   const onSignInPressed = (data) => {
-    console.warn(data)
+    console.log(data)
+    navigation.navigate('Home')
   }
 
   return (
     <KeyboardAvoidingView behavior='position'>
       <ScrollView showsHorizontalScrollIndicator={false}>
-        <View style={[styles.root, { height: height }]}>
+        <View
+          style={[styles.root, { height: height, width: width, maxWidth: 520 }]}
+        >
           <Image
             source={Logo}
             style={[styles.logo, { height: height * 0.3 }]}
@@ -58,10 +63,9 @@ const SignInScreen = () => {
           </View>
           <LinearGradient
             // Button Linear Gradient
-            colors={[
-              'rgba(29, 255, 228, 0.5) 2.77%',
-              'rgba(148, 236, 117, 0.5)',
-            ]}
+            colors={['#2197ef', '#4aae56']}
+            start={{ x: 0, y: 1 }}
+            end={{ x: 1, y: 0 }}
             style={styles.login}
           >
             <CustomButton
@@ -96,12 +100,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   login: {
-    marginTop: 60,
     flex: 1,
+    alignItems: 'center',
+    marginTop: 60,
     width: '100%',
-    maxHeight: 50,
-    borderRadius: '25px',
-    justifyContent: 'center',
+    borderRadius: '40px',
     maxWidth: 400,
   },
 })
